@@ -18,7 +18,9 @@
     const fov = 20 // 鏡頭光學倍率
     const near = 0.1
     const far = 1000
-    const backgroundColor = new THREE.Color( 0x000000 );
+    const backgroundColor = new THREE.Color( 0x2DC4ED );
+    const light1_color = 0xffffff
+    const light2_color = 0x2DC4ED
 
     // 物件群組
     const heroGroup = new THREE.Group()
@@ -43,14 +45,8 @@
         // transparent: true,
         opacity: 1
     })
-    const material_3 = new THREE.MeshPhysicalMaterial({
+    const material_3 = new THREE.MeshMatcapMaterial({
         color: 0xffffff,
-        metalness: 1,
-        roughness: 0.6,
-        transmission: 0.9,
-        // flatShading: true,
-        // transparent: true,
-        opacity: 1
     })
 
     let canvas, camera, renderer, scene;
@@ -67,8 +63,8 @@
         camera.position.set(0,1,15)
 
         // 燈光 (color, intensity)
-        const light = new THREE.DirectionalLight(0xCEC8C2, 0.5)
-        const light2 = new THREE.DirectionalLight(0xffffff, 2)
+        const light = new THREE.DirectionalLight(light1_color, 0.5)
+        const light2 = new THREE.DirectionalLight(light2_color, 2)
         light.position.set(0, 5, 15)
         light2.position.set(5, 0, -5)
         scene.add(light)
@@ -95,11 +91,22 @@
             (gltf) => {
                 const newAryMesh = []
                 const innerGroup = new THREE.Group()
-                gltf.scene.children.forEach((mesh) => {
-                    console.log('已讀取到的物件', mesh)
-                    mesh.material = material_1
+                gltf.scene.children.forEach((mesh, idx) => {
+                    console.log('已讀取到的物件', idx, mesh)
+                    switch (idx) {
+                        case 0:
+                            mesh.material = material_1
+                            break;
+                        case 1:
+                            mesh.material = material_2
+                            break;
+                        case 2:
+                            mesh.material = material_3
+                            break;
+                        default:
+                            break;
+                    }
                     newAryMesh.push(mesh)
-                    // heroGroup.add(mesh)
                 })
                 newAryMesh.forEach((mesh) => {
                     heroGroup.add(mesh)
