@@ -1,6 +1,8 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import Cylinder from './components/Cylinder.vue'
+import GlassTest from './components/GlassTest.vue'
+import Humantest from './components/Humantest.vue'
 </script>
 
 <template>
@@ -11,7 +13,8 @@ import Cylinder from './components/Cylinder.vue'
         <a href="https://vuejs.org/" target="_blank">
         <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
         </a> -->
-        <Cylinder />
+        <!-- <Cylinder /> -->
+        <Humantest />
         <!-- <HelloWorld /> -->
         <h1>THREE.JS RENDER TEST<br><span>PLAY FUN CYLINDER GLASS</span></h1>
     </div>
@@ -31,7 +34,7 @@ filter: drop-shadow(0 0 2em #42b883aa);
 }
 h1 {
     position: fixed;
-    font-family: 'NT SEAWAVE (standart)';
+    font-family: 'PP Monument Extended';
     top: 50%;
     left: 50%;
     z-index: 100;
